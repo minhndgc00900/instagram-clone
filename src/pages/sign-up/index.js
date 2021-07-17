@@ -28,6 +28,7 @@ import React, {
   
     const handleSignUp = async event => {
       event.preventDefault();
+      
     //   try {
 
     //   } catch (error) {
