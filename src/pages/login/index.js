@@ -1,5 +1,9 @@
 /* eslint-disable prettier/prettier */
-import React, { useContext, useState } from 'react'
+import React, { 
+  useContext, 
+  useEffect, 
+  useState 
+} from 'react'
 import PropTypes from 'prop-types'
 import { Link, useHistory } from 'react-router-dom';
 import FirebaseContext from '../../context/firebase';
@@ -16,8 +20,21 @@ function Login(props) {
   // const [isInvalid, setIsInvalid] = useState(false)
   const isInvalid = password === '' || emailAddress === '';
 
-  const handleLogin = () => {
+  useEffect(() => {
+    document.title = 'Login - Instagram';
+  }, []);
 
+  const handleLogin = async event => {
+    event.preventDefault();
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+      history.push(ROUTES.DASHBOARD);
+    } catch (error) {
+      setEmailAddress('');
+      setPassword('');
+      setError(error.message);
+    }
   }
 
   return (
@@ -36,7 +53,7 @@ function Login(props) {
           </h1>
 
           {error && (
-            <p className='mb-4 text-xs text-red-primary'>
+            <p className='mb-4 text-xs text-red-500'>
               {error}
             </p>
           )
