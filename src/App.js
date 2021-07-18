@@ -13,6 +13,7 @@ import './styles/app.css';
 // lazy import
 const LoginComponent = lazy(() => import('./pages/login/index'))
 const SignUpComponent = lazy(() => import('./pages/sign-up/index'))
+const DashboardComponent = lazy(() => import('./pages/dashboard/index'))
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path={PATH_NAME.PROFILE}>
             <Redirect to="/login" />  
           </Route>
+          <Route exact path={PATH_NAME.DASHBOARD} component={DashboardComponent} />
           <Route exact path={PATH_NAME.LOGIN} component={LoginComponent} />
           <Route exact path={PATH_NAME.SIGN_UP} component={SignUpComponent} />
         </Switch>
